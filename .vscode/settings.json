@@ -1,0 +1,10 @@
+{
+    "editor.formatOnSave": true,
+    "[java]": {
+        "editor.formatOnSave": true
+    },
+    "github.copilot.enable": {
+        "java": false,
+    },
+    "java.jdt.ls.java.home": "/usr/lib/jvm/msopenjdk-current"
+}
