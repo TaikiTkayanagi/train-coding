@@ -5,7 +5,7 @@ import java.util.Random;
 
 public class StringUtil {
     public static String generateRandomString(int length) {
-        final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
         Random random = new Random();
         StringBuilder sb = new StringBuilder(length);
         for (int i = 0; i < length; i++) {
