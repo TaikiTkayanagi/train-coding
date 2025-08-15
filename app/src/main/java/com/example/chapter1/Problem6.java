@@ -5,30 +5,39 @@ public class Problem6 {
         String input = "aabcccccaaa";
         // String input = "ab";
         System.out.println("input: " + input);
+        int compressCount = compressCount(input);
+        if (compressCount > input.length()) {
+            System.out.println(input);
+            return;
+        }
+        var result = compress(input, new StringBuilder(compressCount));
+        System.out.println(result);
+    }
 
-        var sb = new StringBuilder();
+    private static int compressCount(String input) {
+        int count = 0;
         for (int i = 0; i < input.length(); i++) {
-            int iterator = i + 1;
-            var character = input.charAt(i);
-            if (iterator >= input.length()) {
-                sb.append(character + "1");
-                break;
+            var c = input.charAt(i);
+            if (i + 1 >= input.length() || c != input.charAt(i + 1)) {
+                count += 2;
             }
-            var nextCharacter = input.charAt(iterator);
-            while (character == nextCharacter && iterator < input.length()) {
-                iterator++;
-                if (iterator >= input.length()) {
-                    break;
-                }
-                nextCharacter = input.charAt(iterator);
+        }
+        return count;
+    }
+
+    private static String compress(String input, StringBuilder sb) {
+        int count = 0;
+        for (int i = 0; i < input.length(); i++) {
+            count++;
+            var c = input.charAt(i);
+            if (i + 1 >= input.length() || c != input.charAt(i + 1)) {
+                sb.append(c);
+                sb.append(count);
+                count = 0;
             }
-            sb.append(character);
-            sb.append(iterator - i);
-            i = iterator - 1;
         }
 
-        var compress = sb.toString();
-        System.out.println("compress: " + compress);
-        System.out.println(compress.length() > input.length() ? compress : input);
+        return sb.toString();
     }
+
 }
