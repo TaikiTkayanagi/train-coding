@@ -4,30 +4,34 @@ import java.util.HashMap;
 
 public class Problem5 {
     public static void main(String args[]) {
-        String[][] input = { { "pale", "ple" }, { "pales", "pale" }, { "pale", "bale" }, { "pale", "bake" } };
+        String[][] input = { { "ab", "b" }, { "pales", "pale" }, { "pale", "bale" }, { "pale", "bake" } };
 
         for (var array : input) {
             String from = array[0];
             String to = array[1];
             if (to.length() + 1 == from.length()) {
-                var memo = createMemo(to);
+                var memo = createMemo(from);
                 var result = replaceMemo(memo, from);
                 showResult(result);
             } else if (to.length() == from.length() + 1) {
-                var memo = createMemo(from);
+                var memo = createMemo(to);
                 var result = replaceMemo(memo, to);
                 showResult(result);
             } else if (to.length() == from.length()) {
-                var memo = createMemo(from);
-                var result = replaceMemo(memo, to);
-                var count = 0;
-                for (var value : result.values()) {
-                    count += value;
+                var isDiffOne = false;
+                var isOutput = false;
+                for (int i = 0; i < to.length(); i++) {
+                    if (to.charAt(i) != from.charAt(i)) {
+                        if (isDiffOne) {
+                            System.out.println("NO");
+                            isOutput = true;
+                            break;
+                        }
+                        isDiffOne = true;
+                    }
                 }
-                if (count == 1) {
+                if (!isOutput) {
                     System.out.println("YES");
-                } else {
-                    System.out.println("NO");
                 }
             }
         }
@@ -35,11 +39,12 @@ public class Problem5 {
 
     private static HashMap<Character, Integer> createMemo(String s) {
         var memo = new HashMap<Character, Integer>();
-        for (var c : s.toCharArray()) {
+        for (int i = 0; i < s.length(); i++) {
+            var c = s.charAt(i);
             if (memo.containsKey(c)) {
-                memo.replace(c, memo.get(c) + 1);
+                memo.replace(c, memo.get(c) + (i + 1));
             } else {
-                memo.put(c, 1);
+                memo.put(c, i + 1);
             }
         }
 
@@ -47,10 +52,9 @@ public class Problem5 {
     }
 
     private static HashMap<Character, Integer> replaceMemo(HashMap<Character, Integer> memo, String s) {
-        for (var c : s.toCharArray()) {
-            if (memo.containsKey(c)) {
-                memo.replace(c, memo.get(c) - 1);
-            }
+        for (int i = 0; i < s.length(); i++) {
+            var c = s.charAt(i);
+            memo.replace(c, memo.get(c) - (i + 1));
         }
         return memo;
     }
