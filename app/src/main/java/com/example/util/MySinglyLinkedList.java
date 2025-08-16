@@ -21,7 +21,7 @@ public class MySinglyLinkedList<T> {
         }
     }
 
-    public T getFromLast(int index) {
+    public SinglyNode<T> getFromLast(int index) {
         if (index < 0 || first == null) {
             return null;
         }
@@ -41,6 +41,15 @@ public class MySinglyLinkedList<T> {
             count++;
             iterator = iterator.getNext();
         }
-        return iterator.getValue();
+        return iterator;
+    }
+
+    public void show() {
+        var iterator = first;
+        while (iterator != null && iterator.getValue() != null) {
+            System.out.print(iterator.getValue() + "→");
+            iterator = iterator.getNext();
+        }
+        System.out.println();
     }
 }

@@ -9,6 +9,6 @@ public class problem2 {
         list.add(array);
 
         // TODO: 再帰を使った解放とポインターを2つ使った解放を試す
-        System.out.println(list.getFromLast(1));
+        System.out.println(list.getFromLast(1).getValue());
     }
 }
