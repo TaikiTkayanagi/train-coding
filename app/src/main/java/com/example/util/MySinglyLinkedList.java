@@ -1,6 +1,6 @@
 package com.example.util;
 
-public class MySinglyLinkedList<T> {
+public class MySinglyLinkedList<T extends Comparable<? super T>> {
     private SinglyNode<T> first;
 
     public void add(T[] array) {
@@ -18,6 +18,31 @@ public class MySinglyLinkedList<T> {
             var node = new SinglyNode<T>(array[i]);
             iterator.setNext(node);
             iterator = node;
+        }
+    }
+
+    public void sortBy(T pivot) {
+        var itgerator = first;
+        while (itgerator != null) {
+            if (itgerator.getValue().compareTo(pivot) < 0) {
+                itgerator = itgerator.getNext();
+                continue;
+            }
+            var next = itgerator.getNext();
+            while (next != null) {
+                if (next.getValue().compareTo(pivot) >= 0) {
+                    next = next.getNext();
+                    continue;
+                }
+                var tmp = itgerator.getValue();
+                itgerator.setValue(next.getValue());
+                next.setValue(tmp);
+                break;
+            }
+            if (next == null) {
+                break;
+            }
+            itgerator = itgerator.getNext();
         }
     }
 
