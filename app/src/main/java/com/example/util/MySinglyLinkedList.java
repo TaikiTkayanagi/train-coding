@@ -11,9 +11,9 @@ public class MySinglyLinkedList<T extends Comparable<? super T>> {
         this.first = node;
     }
 
-    public void add(T[] array) {
+    public SinglyNode<T> add(T[] array) {
         if (array.length == 0) {
-            return;
+            return null;
         }
         if (first == null) {
             first = new SinglyNode<T>(array[0]);
@@ -27,6 +27,7 @@ public class MySinglyLinkedList<T extends Comparable<? super T>> {
             iterator.setNext(node);
             iterator = node;
         }
+        return iterator;
     }
 
     public MySinglyLinkedList<Integer> calculate(MySinglyLinkedList<Integer> other) {
