@@ -37,13 +37,6 @@ public class Problem2 {
             return result.getValue();
         }
 
-        public Integer peek() {
-            if (head == null) {
-                return null;
-            }
-            return head.getValue();
-        }
-
         public Integer min() {
             if (minHead == null) {
                 return null;
